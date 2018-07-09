@@ -7,7 +7,8 @@ import Login from '@/pages/Login/Index'
 import Index from '@/pages/Index/Index'
 import List from '@/pages/Index/List'
 import Listson from '@/pages/Index/Listson'
-
+// 人员管理
+import PRegistered from '@/pages/rygl/PRegistered'
 
 Vue.use(Router)
 
@@ -16,11 +17,7 @@ export default new Router({
     {path: '/',component: Layout,
       children:[
         {path: '/',component: Index,},
-        {path: '/list',component: List,
-          children:[
-            {path: '',component: Listson},
-          ]
-        },
+        {path: '/pslregisted',component: PRegistered,},
       ]
     },
     {path: '/login',component: LoginLayout,

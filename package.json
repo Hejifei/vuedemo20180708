@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "element-ui": "^2.4.3",
+    "font-awesome": "^4.7.0",
+    "less": "^3.5.3",
+    "less-loader": "^4.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
