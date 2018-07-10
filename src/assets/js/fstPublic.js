@@ -1,19 +1,34 @@
-import Vue from 'vue';
 import $ from 'jquery';
-// import VueResource from 'vue-resource';
-// import VueRouter from 'vue-router';
+import Vue from 'vue';
+
+import VueResource from 'vue-resource';
+import VueRouter from 'vue-router';
 import axios from 'axios'
 import qs from 'qs';
 
-exports.install = function (Vue, options) {
-    let APIURL = ''
+// import promise from 'es6-promise';
+// promise.polyfill();
+
+Vue.use(VueRouter);
+Vue.use(VueResource);
+
+function install(Vue, options) {
+    let APIURL = 'http://172.16.0.60:8080'
 
     //ajax全局配置_url接口名称 a参数 b成功方法(code 1)  c失败方法(code other)
     const _ajax = function(that,_url, a, b, c) {
+        // 统一错误提示
         if (typeof c != "function") {
             c = function (data) {
-                setTimeout(function(){layer.closeAll();}, 2000);
-                layer.alert(data.msg, {icon: 5}, function () { layer.closeAll(); })
+                that.$alert(data.msg, '提示', {
+                    confirmButtonText: '确定',
+                    callback: action => {
+                        // that.$message({
+                        //     type: 'info',
+                        //     message: `action: ${ action }`
+                        // });
+                    }
+                });
             }
         }
         axios({
@@ -24,18 +39,32 @@ exports.install = function (Vue, options) {
             // console.log(res)
             let d = res.data;
             d = (typeof(d) == 'string') ? JSON.parse(d) : d;
-            //成功的处理
-            // if (d.code == '-1' || _url == "/api/session/check" && d.code == 0) {
-            //     getSID(that);
-            // } else if (d.code == '-3'|| _url == "/api/user/logout" && d.code == -1) {
-            //     layer.msg(d.msg);
-            //     getSID(that,'/login')
-            // } else {
-                d.code == '1' ? b(d) : c(d);
-            // }
+            d.code == '1' ? b(d) : c(d);
           }).catch(function(err){
             console.log('报错：' +err);
           })
+    }
+
+    // 删除的公共方法
+    const Delete = (that,url,id)=>{
+        that.$confirm('确认删除?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+            console.log('1111111111')
+            self._ajax(self,APIURL+url, id, function (data) {
+                that.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+            })
+        }).catch(() => {
+            that.$message({
+              type: 'info',
+              message: '已取消删除'
+            });          
+        });
     }
 
     //获取地址栏参数
@@ -93,7 +122,18 @@ exports.install = function (Vue, options) {
         let toDay = Y + '-' + M + '-' + D;
         return toDay;
     }
+
+    Vue.prototype.APIURL=APIURL;
+    Vue.prototype._ajax=_ajax;
+    Vue.prototype.Delete = Delete;
+    Vue.prototype.getUrl=getUrl;
+    Vue.prototype.settime=settime;
+    Vue.prototype.unixChange=unixChange;
+    Vue.prototype.formatTime=formatTime;
+
 }
+export default install;
+
 
 
 

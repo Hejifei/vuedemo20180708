@@ -38,18 +38,18 @@
                   <img src="../../assets/img/icons/side_rygl.png"/>
                   <span>人员管理</span>
                 </template>
-                <el-menu-item index="/pslregisted">已登记人员管理</el-menu-item>
-                <el-menu-item index="/list">未等级人员管理</el-menu-item>
-                <el-menu-item index="">人员分组管理</el-menu-item>
-                <el-menu-item index="">人员数据同步</el-menu-item>
+                <el-menu-item index="/PeopleRegistered">已登记人员管理</el-menu-item>
+                <el-menu-item index="/PeopleUnRegist">未登记人员管理</el-menu-item>
+                <el-menu-item index="/PeopleGroupList">人员分组管理</el-menu-item>
+                <el-menu-item index="/PeopleDataAsync">人员数据同步</el-menu-item>
               </el-submenu>
               <el-submenu class="textleft" index="2">
                 <template slot="title">
                   <img src="../../assets/img/icons/side_tdgl.png"/>
                   <span>通道管理</span>
                 </template>
-                <el-menu-item index="">设备管理</el-menu-item>
-                <el-menu-item index="">场景管理</el-menu-item>
+                <el-menu-item index="/EquipmentManage">设备管理</el-menu-item>
+                <el-menu-item index="/SceneManage">场景管理</el-menu-item>
               </el-submenu>
               <el-submenu class="textleft" index="3">
                 <template slot="title">
@@ -59,7 +59,7 @@
                 <el-menu-item index="">通知任务</el-menu-item>
                 <el-menu-item index="">通知记录</el-menu-item>
               </el-submenu>
-              <el-menu-item class="textleft" index="4">
+              <el-menu-item class="textleft" index="/MonitorManage">
                 <img src="../../assets/img/icons/side_jkgl.png"/>
                 <span slot="title">监控管理</span>
               </el-menu-item>

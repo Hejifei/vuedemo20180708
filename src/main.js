@@ -10,10 +10,17 @@ import router from './router'
 
 import "./assets/css/fstpublic.less";
 // 公共方法引用
-import fstPublic from "./assets/js/fstPublic.js";
+import fstjs from "./assets/js/fstPublic.js";
+
+// 视频播放插件引入配置
+import VideoPlayer from 'vue-video-player'
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+Vue.use(VideoPlayer)
+
 
 Vue.use(ElementUI);
-Vue.use(fstPublic);
+Vue.use(fstjs);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

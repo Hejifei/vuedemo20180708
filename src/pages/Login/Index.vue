@@ -1,17 +1,71 @@
 <template>
-  <div class="hello">
-    账号:<input /><br />
-    密码:<input /><br />
+  <div class="loginC">
+    <div class="loginCenter">
+      <img src="../../assets/img/login_logo1.png" /> 
+      <img src="../../assets/img/logo_title.png" /> 
+      <div class="loginfoC">
+        <img src="../../assets/img/login_head.png"/>
+        <el-form :model="ruleForm" status-icon :rules="rules2" ref="ruleForm"  class="demo-ruleForm">
+          <el-form-item label="账号" prop="name">
+            <el-input v-model.number="ruleForm.name"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="pass">
+            <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-button type="info" style="width:100%;">登录</el-button>
+          <!-- <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item> -->
+        </el-form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Layout',
   data () {
+    var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.ruleForm2.checkPass !== '') {
+            this.$refs.ruleForm2.validateField('checkPass');
+          }
+          callback();
+        }
+    };
     return {
+      ruleForm: {
+          pass: '',
+          name: ''
+        },
+        rules2: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' }
+          ],
+          pass: [
+            { validator: validatePass, trigger: 'blur' }
+          ]
+        }
     }
-  }
+  },
+  methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
 }
 </script>
 
