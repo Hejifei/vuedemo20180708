@@ -80,7 +80,10 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000">
+        :current-page.sync="currentPage"
+        :page-size="100"
+        :total="1000"
+        @current-change="handleCurrentChange">
       </el-pagination>
     </div>
   </div>
@@ -111,9 +114,24 @@ export default {
           phone: '18020285668',
           type:'宿管',
           idcard:'320981199306174736',
-        }],
+      }],
+      currentPage: 5,
     }
-  }
+  },
+  created(){
+    var self = this;
+  },
+  mounted () {  
+    var self = this;
+    self._ajax(self,'/api/', {}, function (data) {
+
+    })
+  },
+  methods: {
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    }
+  },
 }
 </script>
 

@@ -9,8 +9,11 @@ import App from './App'
 import router from './router'
 
 import "./assets/css/fstpublic.less";
+// 公共方法引用
+import fstPublic from "./assets/js/fstPublic.js";
 
 Vue.use(ElementUI);
+Vue.use(fstPublic);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
