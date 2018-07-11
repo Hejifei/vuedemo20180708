@@ -1,13 +1,24 @@
 <template>
   <div class="hello">
-    <div class="listtitle">人员数据同步</div>
+    <div class="listtitle">实时计数记录</div>
     <div class="listSearchC">
-      <el-input
-        placeholder="任务名称"
-        v-model="querydata.name"
-        clearable>
-      </el-input>
-      <el-select v-model="querydata.selectval" placeholder="请选择">
+      <el-select v-model="querydata.selectval" placeholder="选择任务">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-select v-model="querydata.selectval" placeholder="设备">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-select v-model="querydata.selectval" placeholder="摄像头">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -17,10 +28,9 @@
       </el-select>
       <el-button round @click="querylist">查询</el-button>
       <el-row>
-        <el-col :span="12">
-          <el-button @click="dataasync">数据同步</el-button> 
+        <el-col class="rowright">
+          <el-button><img src="../../assets/img/icons/content_export.png"/> 导出</el-button>
         </el-col>
-        <el-col :span="12" class="rowright"></el-col>
       </el-row>
       
     </div>
@@ -30,26 +40,22 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
-        @selection-change="handleSelectionChange"
         >
         <el-table-column
-          label="选择"
-          type="selection"
-          width='50'
-          >
+          prop="camera"
+          label="摄像头">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="任务名称">
+          prop="equipment"
+          label="设备">
         </el-table-column>
         <el-table-column
-          prop="type"
-          label="同步状态">
+          prop="scene"
+          label="场景">
         </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <router-link to="/PeopleDataAsyncDetail" class="el-button el-button--mini redbtn">查看</router-link>
-          </template>
+        <el-table-column
+          prop="times"
+          label="计数">
         </el-table-column>
       </el-table>
       <el-pagination
@@ -68,11 +74,10 @@
 export default {
   data () {
     return {
-      delIds:[],
       querydata:{
         name:'',
         phone:'',
-        selectval:'选项1',
+        selectval:'',
         currentPage: 1,
         pagesize:10,
         pagetotal:100
@@ -83,18 +88,16 @@ export default {
       }],
       tableData: [{
           id: '1',
-          name: '王小虎',
-          sex: '男',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          scene: '场景001',
+          equipment:'设备001',
+          camera:'摄像头001',
+          times:'1123',
         }, {
           id: '2',
-          name: '王小二',
-          sex: '女',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          scene: '场景001',
+          equipment:'设备001',
+          camera:'摄像头001',
+          times:'1123',
       }],
       
     }
@@ -119,20 +122,12 @@ export default {
       // console.log(`当前页: ${val}`);
       this.querylist();
     },
-    handleDelete(id){
-      //删除接口
-      var self = this;
-      this.Delete(self,'url',id);
-    },
-    handleSelectionChange(val) {
-      // 获取列表选中项id
-      this.delIds = val.map((val)=>val.id);
-    },
-    dataasync(){
-      // 列表页删除
-      console.log(`数据同步${this.delIds}`)
-      this.$router.push({path:'/PeopleDataAsyncNext'});
-      // this.Delete(self,'url',this.delIds);
+    patrolNow(){
+      let self = this;
+      console.log(`当前页: ${self.querydata.currentPage}`);
+      // self._ajax(self,'/api/', self.querydata, function (data) {
+
+      // })
     }
   },
 }

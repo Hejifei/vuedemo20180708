@@ -1,16 +1,16 @@
 <template>
   <div class="hello">
-    <div class="listtitle">人员分组管理</div>
+    <div class="listtitle">通知任务</div>
     <div class="listSearchC">
       <el-input
-        placeholder="分组名"
+        placeholder="输入关键字查找"
         v-model="querydata.name"
         clearable>
       </el-input>
       <el-button round @click="querylist">查询</el-button>
       <el-row>
         <el-col :span="12">
-          <router-link to="/PeopleGroupListAdd" class="el-button">新增</router-link>
+          <router-link to="/NoticeTaskAdd" class="el-button">新增</router-link>
           <el-button @click="listDelete">删除</el-button> 
         </el-col>
         <el-col :span="12" class="rowright"></el-col>
@@ -27,25 +27,40 @@
         >
         <el-table-column
           label="选择"
-          width='50'
-          type="selection">
+          type="selection"
+          width='50'>
         </el-table-column>
         <el-table-column
           prop="name"
-          label="分组名">
+          label="任务名称">
         </el-table-column>
         <el-table-column
-          prop="sex"
-          label="描述">
+          prop="state"
+          label="任务状态">
         </el-table-column>
         <el-table-column
-          prop="phone"
-          label="状态">
+          prop="starttime"
+          label="开始时间">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column
+          prop="endtime"
+          label="开始时间">
+        </el-table-column>
+        <el-table-column
+          prop="days"
+          label="周天">
+        </el-table-column>
+        <el-table-column
+          prop="content"
+          title='content'
+          :show-overflow-tooltip='true'
+          width='150'
+          label="通知内容">
+        </el-table-column>
+        <el-table-column label="操作" width='230'>
           <template slot-scope="scope">
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">查看</router-link>
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">编辑</router-link>
+            <router-link to="/NoticeTaskAdd" class="el-button el-button--mini redbtn">查看</router-link>
+            <router-link to="/NoticeTaskAdd" class="el-button el-button--mini redbtn">修改</router-link>
             <el-button class="delbtn"
               size="mini"
               type="danger"
@@ -84,18 +99,20 @@ export default {
       }],
       tableData: [{
           id: '1',
-          name: '王小虎',
-          sex: '男',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          name: 'xx任务名称xxx',
+          state: '正常',
+          starttime: '2018-02-05 13:34',
+          endtime:'2018-03-05 13:34',
+          days:'周一、周二、周三',
+          content:'通知内容不会完全显示'
         }, {
           id: '2',
-          name: '王小二',
-          sex: '女',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          name: 'xx任务名称xxx',
+          state: '正常',
+          starttime: '2018-02-05 13:34',
+          endtime:'2018-03-05 13:34',
+          days:'周一、周二、周三',
+          content:'通知内容不会完全显示'
       }],
       
     }

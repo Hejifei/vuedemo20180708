@@ -1,16 +1,16 @@
 <template>
   <div class="hello">
-    <div class="listtitle">人员分组管理</div>
+    <div class="listtitle">考勤任务</div>
     <div class="listSearchC">
       <el-input
-        placeholder="分组名"
-        v-model="querydata.name"
+        placeholder="输入关键字查找"
+        v-model="querydata.keywords"
         clearable>
       </el-input>
       <el-button round @click="querylist">查询</el-button>
       <el-row>
         <el-col :span="12">
-          <router-link to="/PeopleGroupListAdd" class="el-button">新增</router-link>
+          <router-link to="/WorkCheckAdd" class="el-button">新增</router-link>
           <el-button @click="listDelete">删除</el-button> 
         </el-col>
         <el-col :span="12" class="rowright"></el-col>
@@ -27,29 +27,37 @@
         >
         <el-table-column
           label="选择"
+          type="selection"
           width='50'
-          type="selection">
+          >
         </el-table-column>
         <el-table-column
           prop="name"
-          label="分组名">
+          label="任务名称">
         </el-table-column>
         <el-table-column
-          prop="sex"
-          label="描述">
+          prop="desc"
+          :show-overflow-tooltip='true'
+          label="任务描述">
         </el-table-column>
         <el-table-column
-          prop="phone"
+          prop="days"
+          label="周天">
+        </el-table-column>
+        <el-table-column
+          prop="timerange"
+          label="时间段">
+        </el-table-column>
+        <el-table-column
+          prop="state"
           label="状态">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width=250>
           <template slot-scope="scope">
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">查看</router-link>
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">编辑</router-link>
-            <el-button class="delbtn"
+            <router-link to="/WorkCheckAdd" class="el-button el-button--mini redbtn">修改</router-link>
+            <el-button class="greybtn"
               size="mini"
-              type="danger"
-              @click="handleDelete(scope.row.id)">删除</el-button>
+              @click="taskStop(scope.row.id)">暂停</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -71,9 +79,7 @@ export default {
     return {
       delIds:[],
       querydata:{
-        name:'',
-        phone:'',
-        selectval:'选项1',
+        keywords:'',
         currentPage: 1,
         pagesize:10,
         pagetotal:100
@@ -84,18 +90,18 @@ export default {
       }],
       tableData: [{
           id: '1',
-          name: '王小虎',
-          sex: '男',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          name: 'xx任务名称xx',
+          desc:'任务描述任务描述',
+          days: '周六、周日',
+          timerange:'2017-06-20 2017-08-20',
+          state:'启动',
         }, {
           id: '2',
-          name: '王小二',
-          sex: '女',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          name: 'xx任务名称xx',
+          desc:'任务描述任务描述',
+          days: '周六、周日',
+          timerange:'2017-06-20 2017-08-20',
+          state:'启动',
       }],
       
     }
@@ -120,10 +126,13 @@ export default {
       // console.log(`当前页: ${val}`);
       this.querylist();
     },
-    handleDelete(id){
-      //删除接口
+    taskStop(id){
+      //暂停
       var self = this;
-      this.Delete(self,'url',id);
+      // this.Delete(self,'url',id);
+    },
+    noticeOfLeaving(id){
+      // 离岗通知
     },
     handleSelectionChange(val) {
       // 获取列表选中项id

@@ -1,14 +1,13 @@
 <template>
   <div class="hello">
-    <div class="listtitle">新增场景</div>
+    <div class="listtitle">授权操作</div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position='left' label-width="100px" class="demo-ruleForm newaddInfoC">
-      <el-form-item label="场景名称" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+      <el-form-item label="场景">
+        <el-select v-model="ruleForm.scene" placeholder="选择场景" class="right15">
+          <el-option label="场景1" value="场景1"></el-option>
+        </el-select>
       </el-form-item>
-      <el-form-item label="场景描述" prop="desc">
-        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-      </el-form-item>
-      <el-form-item  prop="listadd">
+      <el-form-item prop="listadd">
         <div class="addtransferC">
           <el-transfer
             style="text-align: left; display: inline-block"
@@ -16,8 +15,8 @@
             filterable
             :left-default-checked="[]"
             :right-default-checked="[]"
-            :titles="['未添加设备', '已添加的设备']"
-            :button-texts="['删除','添加']"
+            :titles="['未添加设备', '下发库']"
+            :button-texts="['删除下发库','添加到下发库']"
             :format="{
               noChecked: '${total}',
               hasChecked: '${checked}/${total}'
@@ -28,6 +27,15 @@
             <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
           </el-transfer>
         </div>
+      </el-form-item>
+      <el-form-item label="审批状态" prop="ifpass">
+        <template>
+          <el-radio v-model="ruleForm.ifpass" label="1">通过</el-radio>
+          <el-radio v-model="ruleForm.ifpass" label="2">不通过</el-radio>
+        </template>
+      </el-form-item>
+      <el-form-item label="原因" prop="reason">
+        <el-input type="textarea" v-model="ruleForm.reason"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitForm('ruleForm')">保存</el-button>
@@ -46,7 +54,7 @@ export default {
         for (let i = 1; i <= 15; i++) {
           data.push({
             key: i,
-            label: `分组 ${ i }`,
+            label: `姓名 性别 18020285668`,
             // disabled: i % 4 === 0
           });
         }
@@ -55,20 +63,23 @@ export default {
     return {
       data:generateData(),
       ruleForm: {
-          name: '',
-          desc: '',
+          scene: '',
           listadd:[],
-          equipment: '',
+          ifpass:'',
+          reason:'',
       },
       rules: {
-          name: [
-            { required: true, message: '请输入姓名', trigger: 'blur' },
-          ],
-          desc: [
-            { required: true, message: '请输入场景描述', trigger: 'blur' },
+          scene: [
+            { required: true, message: '请选择场景', trigger: 'change' }
           ],
           listadd: [
-            { required: true, message: '请选择设备', trigger: 'change' }
+            { required: true, message: '请添加设备到下发库', trigger: 'change' }
+          ],
+          ifpass: [
+            { required: true, message: '请选择审批状态', trigger: 'change' }
+          ],
+          reason: [
+            { required: true, message: '请输入原因', trigger: 'blur' }
           ],
         }
       }
@@ -84,6 +95,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      console.log(this.ruleForm.timerange)
       let self = this;
       this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -101,7 +113,7 @@ export default {
       console.log(value, direction, movedKeys);
     },
     backtolist() {
-      this.$router.push({path:'/SceneManage'});
+      this.$router.push({path:'/VistorAuthorize'});
     },
   },
 }

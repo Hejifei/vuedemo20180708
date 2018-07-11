@@ -5,34 +5,36 @@
       <el-form-item label="分组名" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
-      <el-form-item label="状态" prop="sex">
-        <el-select v-model="ruleForm.sex" placeholder="请选择性别">
-          <el-option label="男" value="boy"></el-option>
-          <el-option label="女" value="girl"></el-option>
+      <el-form-item label="状态" prop="state">
+        <el-select v-model="ruleForm.state" placeholder="请选择状态">
+          <el-option label="有效" value="boy"></el-option>
+          <el-option label="无效" value="girl"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="描述" prop="desc">
         <el-input type="textarea" v-model="ruleForm.desc"></el-input>
       </el-form-item>
-      <div class="addtransferC">
-        <el-transfer
-          style="text-align: left; display: inline-block"
-          v-model="value3"
-          filterable
-          :left-default-checked="[]"
-          :right-default-checked="[]"
-          :titles="['人员', '已添加对象']"
-          :button-texts="['删除','添加到分组对象']"
-          :format="{
-            noChecked: '${total}',
-            hasChecked: '${checked}/${total}'
-          }"
-          @change="handleChange"
-          :data="data">
-          <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
-          <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
-        </el-transfer>
-      </div>
+      <el-form-item prop="listadd">
+        <div class="addtransferC">
+          <el-transfer
+            style="text-align: left; display: inline-block"
+            v-model="ruleForm.listadd"
+            filterable
+            :left-default-checked="[]"
+            :right-default-checked="[]"
+            :titles="['人员', '已添加对象']"
+            :button-texts="['删除','添加到分组对象']"
+            :format="{
+              noChecked: '${total}',
+              hasChecked: '${checked}/${total}'
+            }"
+            @change="handleChange"
+            :data="data">
+            <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
+            <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
+          </el-transfer>
+        </div>
+      </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitForm('ruleForm')">保存</el-button>
         <el-button @click="backtolist()">取消</el-button>
@@ -60,12 +62,11 @@ export default {
       data: generateData(),
       dialogImageUrl: '',
       dialogVisible: false,
-      value3: [],
       ruleForm: {
-          headimgurl:'',
           name: '',
           sex: '',
           phone: '',
+          listadd:[],
           roomNum:'',
           type:'',
           group:'',
@@ -76,42 +77,17 @@ export default {
           desc: ''
       },
       rules: {
-          headimgurl:[
-            { required: true, message: '请上传图片', trigger: 'blur' },
-          ],
           name: [
-            { required: true, message: '请输入姓名', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            { required: true, message: '请输入分组名', trigger: 'blur' },
           ],
-          sex: [
-            { required: true, message: '请选择性别', trigger: 'change' }
+          state: [
+            { required: true, message: '请选择状态', trigger: 'change' }
           ],
-          phone: [
-            { required: true, message: '请输入手机号码', trigger: 'blur' },
-          ],
-          roomNum: [
-            { required: true, message: '请输入宿舍房间号', trigger: 'blur' },
-          ],
-          type: [
-            { required: true, message: '请选择类型', trigger: 'change' }
-          ],
-          group: [
-            { required: true, message: '请选择分组', trigger: 'change' }
-          ],
-          studentNum: [
-            { required: true, message: '请输入学号', trigger: 'blur' },
-          ],
-          teacher: [
-            { required: true, message: '请选择辅导员', trigger: 'change' }
-          ],
-          scene: [
-            { required: true, message: '请选择场景', trigger: 'change' }
-          ],
-          equipment: [
-            { required: true, message: '请选择设备', trigger: 'change' }
+          listadd: [
+            { required: true, message: '请选择分组对象', trigger: 'change' },
           ],
           desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
+            { required: true, message: '请输入描述', trigger: 'blur' }
           ],
           
         }
@@ -145,7 +121,7 @@ export default {
       console.log(value, direction, movedKeys);
     },
     backtolist() {
-      this.$router.push({path:'/PeopleRegistered'});
+      this.$router.push({path:'/PeopleGroupList'});
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);

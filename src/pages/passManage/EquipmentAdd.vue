@@ -65,7 +65,6 @@ export default {
       dialogImageUrl: '',
       dialogVisible: false,
       ruleForm: {
-          headimgurl:'',
           name: '',
           sex: '',
           phone: '',
@@ -149,23 +148,7 @@ export default {
       console.log(value, direction, movedKeys);
     },
     backtolist() {
-      this.$router.push({path:'/PeopleRegistered'});
-    },
-    handleAvatarSuccess(res, file) {
-      console.log('suc')
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
+      this.$router.push({path:'/EquipmentManage'});
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);

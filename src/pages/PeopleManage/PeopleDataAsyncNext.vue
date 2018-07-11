@@ -1,23 +1,29 @@
 <template>
   <div class="hello">
-    <div class="listtitle">新增场景</div>
+    <div class="listtitle">人员数据同步</div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position='left' label-width="100px" class="demo-ruleForm newaddInfoC">
-      <el-form-item label="场景名称" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+      <el-form-item label="选择库" prop="library">
+        <el-select v-model="ruleForm.library" placeholder="选择库">
+          <el-option label="男" value="boy"></el-option>
+          <el-option label="女" value="girl"></el-option>
+        </el-select>
       </el-form-item>
-      <el-form-item label="场景描述" prop="desc">
-        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-      </el-form-item>
-      <el-form-item  prop="listadd">
-        <div class="addtransferC">
+      <el-form-item label="人员分组"  prop="addlist">
+        <el-select v-model="queryinfo.group" placeholder="选择分组" class="right15">
+          <el-option label="group1" value="group1"></el-option>
+        </el-select>
+        <el-input v-model="queryinfo.personname" placeholder="输入人员名" class="right15"></el-input>
+        <el-button round @click="querylist">查询</el-button>
+
+        <div class="addtransferC" style="padding-left:0;">
           <el-transfer
             style="text-align: left; display: inline-block"
-            v-model="ruleForm.listadd"
+            v-model="ruleForm.addlist"
             filterable
             :left-default-checked="[]"
             :right-default-checked="[]"
-            :titles="['未添加设备', '已添加的设备']"
-            :button-texts="['删除','添加']"
+            :titles="['未添加对象', '已添加对象']"
+            :button-texts="['删除数据同步对象','添加到数据同步对象']"
             :format="{
               noChecked: '${total}',
               hasChecked: '${checked}/${total}'
@@ -46,29 +52,28 @@ export default {
         for (let i = 1; i <= 15; i++) {
           data.push({
             key: i,
-            label: `分组 ${ i }`,
+            label: `姓名 性别 18020285668`,
             // disabled: i % 4 === 0
           });
         }
         return data;
     };
     return {
-      data:generateData(),
+      queryinfo:{
+        group:'',
+        personname:'',
+      },
+      data: generateData(),
       ruleForm: {
-          name: '',
-          desc: '',
-          listadd:[],
-          equipment: '',
+          library: '',
+          addlist:[],
       },
       rules: {
-          name: [
-            { required: true, message: '请输入姓名', trigger: 'blur' },
+          library: [
+            { required: true, message: '请选择库', trigger: 'change' }
           ],
-          desc: [
-            { required: true, message: '请输入场景描述', trigger: 'blur' },
-          ],
-          listadd: [
-            { required: true, message: '请选择设备', trigger: 'change' }
+          addlist: [
+            { required: true, message: '请添加对象', trigger: 'change' }
           ],
         }
       }
@@ -84,6 +89,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      console.log(this.ruleForm.timerange)
       let self = this;
       this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -101,7 +107,13 @@ export default {
       console.log(value, direction, movedKeys);
     },
     backtolist() {
-      this.$router.push({path:'/SceneManage'});
+      this.$router.push({path:'/PeopleDataAsync'});
+    },
+    querylist(){
+      let self = this;
+      // self._ajax(self,'/api/', self.querydata, function (data) {
+
+      // })
     },
   },
 }

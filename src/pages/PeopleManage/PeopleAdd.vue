@@ -2,7 +2,7 @@
   <div class="hello">
     <div class="listtitle">新增人员</div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position='left' label-width="100px" class="demo-ruleForm newaddInfoC">
-      <el-form-item label="头像" prop="headimg">
+      <el-form-item label="头像" prop="headimgurl">
         <el-upload
           class="avatar-uploader"
           :action='imgaction'
@@ -68,25 +68,27 @@
           <el-option label="equipment" value="equipment"></el-option>
         </el-select>
       </el-form-item>
-      <div class="addtransferC">
-        <el-transfer
-          style="text-align: left; display: inline-block"
-          v-model="value3"
-          filterable
-          :left-default-checked="[]"
-          :right-default-checked="[]"
-          :titles="['人员下发库', '已添加的库']"
-          :button-texts="['删除下发库','添加到下发库']"
-          :format="{
-            noChecked: '${total}',
-            hasChecked: '${checked}/${total}'
-          }"
-          @change="handleChange"
-          :data="data">
-          <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
-          <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
-        </el-transfer>
-      </div>
+      <el-form-item  prop='addlist'>
+        <div class="addtransferC">
+          <el-transfer
+            style="text-align: left; display: inline-block"
+            v-model="ruleForm.addlist"
+            filterable
+            :left-default-checked="[]"
+            :right-default-checked="[]"
+            :titles="['人员下发库', '已添加的库']"
+            :button-texts="['删除下发库','添加到下发库']"
+            :format="{
+              noChecked: '${total}',
+              hasChecked: '${checked}/${total}'
+            }"
+            @change="handleChange"
+            :data="data">
+            <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
+            <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
+          </el-transfer>
+        </div>
+      </el-form-item>
       <el-form-item label="备注" prop="desc">
         <el-input type="textarea" v-model="ruleForm.desc"></el-input>
       </el-form-item>
@@ -118,7 +120,6 @@ export default {
       data: generateData(),
       dialogImageUrl: '',
       dialogVisible: false,
-      value3: [],
       ruleForm: {
           headimgurl:'',
           name: '',
@@ -126,6 +127,7 @@ export default {
           phone: '',
           roomNum:'',
           type:'',
+          addlist:[],
           group:'',
           studentNum:'',
           teacher:'',
@@ -167,6 +169,9 @@ export default {
           ],
           equipment: [
             { required: true, message: '请选择设备', trigger: 'change' }
+          ],
+          addlist:[
+            { vrequired: true, message: '请添加下发库',trigger: 'change' }
           ],
           desc: [
             { required: true, message: '请填写活动形式', trigger: 'blur' }

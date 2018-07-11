@@ -56,8 +56,8 @@
                   <img src="../../assets/img/icons/side_tzgl.png"/>
                   <span>通知管理</span>
                 </template>
-                <el-menu-item index="">通知任务</el-menu-item>
-                <el-menu-item index="">通知记录</el-menu-item>
+                <el-menu-item index="/NoticeTask">通知任务</el-menu-item>
+                <el-menu-item index="/NoticeRecord">通知记录</el-menu-item>
               </el-submenu>
               <el-menu-item class="textleft" index="/MonitorManage">
                 <img src="../../assets/img/icons/side_jkgl.png"/>
@@ -68,28 +68,28 @@
                   <img src="../../assets/img/icons/side_znmg.png"/>
                   <span>智能门岗</span>
                 </template>
-                <el-menu-item index="">在岗巡查任务</el-menu-item>
-                <el-menu-item index="">在岗巡查记录</el-menu-item>
-                <el-menu-item index="">曝光频次任务</el-menu-item>
-                <el-menu-item index="">曝光频次记录</el-menu-item>
-                <el-menu-item index="">实时计数任务</el-menu-item>
-                <el-menu-item index="">实时计数记录</el-menu-item>
+                <el-menu-item index="/PatrolOndutyTask">在岗巡查任务</el-menu-item>
+                <el-menu-item index="/PatrolOndutyRecord">在岗巡查记录</el-menu-item>
+                <el-menu-item index="/ExposureTimesTask">曝光频次任务</el-menu-item>
+                <el-menu-item index="/ExposureTimesRecord">曝光频次记录</el-menu-item>
+                <el-menu-item index="/CountRealtimeTask">实时计数任务</el-menu-item>
+                <el-menu-item index="/CountRealtimeRecord">实时计数记录</el-menu-item>
               </el-submenu>
               <el-submenu class="textleft" index="6">
                 <template slot="title">
                   <img src="../../assets/img/icons/side_kqgl.png"/>
                   <span>考勤管理</span>
                 </template>
-                <el-menu-item index="">考勤任务</el-menu-item>
-                <el-menu-item index="">考勤记录</el-menu-item>
+                <el-menu-item index="/WorkCheckTask">考勤任务</el-menu-item>
+                <el-menu-item index="/WorkCheckRecord">考勤记录</el-menu-item>
               </el-submenu>
               <el-submenu class="textleft" index="7">
                 <template slot="title">
                   <img src="../../assets/img/icons/side_fkgl.png"/>
                   <span>访客管理</span>
                 </template>
-                <el-menu-item index="">访客授权</el-menu-item>
-                <el-menu-item index="">访客记录</el-menu-item>
+                <el-menu-item index="/VistorAuthorize">访客授权</el-menu-item>
+                <el-menu-item index="/VistorRecord">访客记录</el-menu-item>
               </el-submenu>
               <el-menu-item class="textleft" index="8">
                 <img src="../../assets/img/icons/side_xtgl.png"/>

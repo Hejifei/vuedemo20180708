@@ -1,21 +1,18 @@
 <template>
   <div class="hello">
-    <div class="listtitle">人员分组管理</div>
+    <div class="listtitle">访客授权</div>
     <div class="listSearchC">
+      <el-date-picker
+        v-model="querydata.date"
+        type="date"
+        placeholder="选择日期">
+      </el-date-picker>
       <el-input
-        placeholder="分组名"
-        v-model="querydata.name"
+        placeholder="输入姓名、手机号"
+        v-model="querydata.keywords"
         clearable>
       </el-input>
       <el-button round @click="querylist">查询</el-button>
-      <el-row>
-        <el-col :span="12">
-          <router-link to="/PeopleGroupListAdd" class="el-button">新增</router-link>
-          <el-button @click="listDelete">删除</el-button> 
-        </el-col>
-        <el-col :span="12" class="rowright"></el-col>
-      </el-row>
-      
     </div>
     <div class="listtableC">
       <el-table
@@ -23,33 +20,33 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
-        @selection-change="handleSelectionChange"
         >
         <el-table-column
-          label="选择"
-          width='50'
-          type="selection">
-        </el-table-column>
-        <el-table-column
           prop="name"
-          label="分组名">
-        </el-table-column>
-        <el-table-column
-          prop="sex"
-          label="描述">
+          label="访客姓名">
         </el-table-column>
         <el-table-column
           prop="phone"
-          label="状态">
+          :show-overflow-tooltip='true'
+          label="联系方式">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column
+          prop="timerange"
+          label="时间段">
+        </el-table-column>
+        <el-table-column
+          prop="desc"
+          :show-overflow-tooltip='true'
+          label="来访事由">
+        </el-table-column>
+        <el-table-column
+          prop="namevisted"
+          label="被访人">
+        </el-table-column>
+        <el-table-column label="操作" width=250>
           <template slot-scope="scope">
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">查看</router-link>
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">编辑</router-link>
-            <el-button class="delbtn"
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.row.id)">删除</el-button>
+            <router-link to="/PeopleAdd" class="el-button el-button--mini redbtn">查看</router-link>
+            <router-link to="/Authorize" class="el-button el-button--mini greybtn">授权</router-link>
           </template>
         </el-table-column>
       </el-table>
@@ -71,9 +68,8 @@ export default {
     return {
       delIds:[],
       querydata:{
-        name:'',
-        phone:'',
-        selectval:'选项1',
+        date:'',
+        keywords:'',
         currentPage: 1,
         pagesize:10,
         pagetotal:100
@@ -84,18 +80,18 @@ export default {
       }],
       tableData: [{
           id: '1',
-          name: '王小虎',
-          sex: '男',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          name: '唐老鸭',
+          phone:'18020285668',
+          timerange:'2017-06-20 2017-08-20',
+          desc:'来干嘛干嘛来干嘛干嘛来干嘛干嘛来干嘛干嘛',
+          namevisted: '米老鼠',
         }, {
           id: '2',
-          name: '王小二',
-          sex: '女',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
+          name: '唐老鸭',
+          phone:'18020285668',
+          timerange:'2017-06-20 2017-08-20',
+          desc:'来干嘛干嘛来干嘛干嘛来干嘛干嘛来干嘛干嘛',
+          namevisted: '米老鼠',
       }],
       
     }
@@ -120,20 +116,11 @@ export default {
       // console.log(`当前页: ${val}`);
       this.querylist();
     },
-    handleDelete(id){
-      //删除接口
+    authorize(id){
+      //暂停
       var self = this;
-      this.Delete(self,'url',id);
+      // this.Delete(self,'url',id);
     },
-    handleSelectionChange(val) {
-      // 获取列表选中项id
-      this.delIds = val.map((val)=>val.id);
-    },
-    listDelete(){
-      // 列表页删除
-      console.log(`删除以下：${this.delIds}`)
-      // this.Delete(self,'url',this.delIds);
-    }
   },
 }
 </script>

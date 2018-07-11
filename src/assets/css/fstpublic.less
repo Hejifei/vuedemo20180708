@@ -1,9 +1,14 @@
-#app{min-width:1200px;}
+// #app{min-width:1200px;}
 .el-main{padding:0;background-color: #fff !important;line-height: 30px !important;}
 
 .listtitle{line-height: 50px;padding:0 40px;background-color: #F2F2F2;color:#232323;font-size:16px;text-align: left;}
 // 列表页搜索部分
 .listSearchC{padding:0 40px;text-align:left;line-height:35px;padding:25px 40px;font-size:14px;
+    p{line-height: 28px;margin-bottom:20px;
+        label{font-size:20px;
+            span{color:#7AC231;}
+        }
+    }
     .el-input{width:172px;display:inline-block;margin-right:20px;}
     .el-button{min-width: 96px;display: inline-block;
     }
@@ -26,6 +31,7 @@
     .el-table__body tbody tr:nth-child(even){background-color:#cecece; }
     .redbtn{background-color:#7AC131;color:#fff;}
     .delbtn{background-color:#C13131;color:#fff;}
+    .greybtn{background-color:#4B6A6B;color:#fff;}
     a{margin-left: 10px;}
     .el-pagination{margin-top:20px;}
     .el-pager li:hover {color: #000;}
@@ -36,7 +42,7 @@
 .newaddInfoC{padding:20px 30px;
     .el-form-item__content{text-align:left;}
     .el-input{width:217px;}
-    .addtransferC{text-align: left;padding:20px 0 40px 100px;
+    .addtransferC{text-align: left;
         .el-transfer-panel{width:250px;}
     }
 
@@ -61,6 +67,20 @@
         height: 148px;
         display: block;
     }
+    .specialcheckbox{
+        label{margin-right:15px;}
+        .el-checkbox-button__inner{border: 1px solid #dcdfe6;border-radius: 4px;}
+        .el-checkbox-button.is-checked .el-checkbox-button__inner{border-color: #2A2B31;background-color:#2A2B31;}
+    }
+    .right15{margin-right:15px;}
+    .width250{width:250px;}
+    .c-hide{width:0;height:0;display:none;}
+    .checkboxC{padding:10px 20px;border-radius: 2px;border:1px solid rgba(0, 0, 0, 0.5);max-width:1000px;
+        .el-checkbox{
+            margin-left: 0 !important;
+            margin-right:20px;
+        }
+    }
 }
 // 监控管理模块
 .monitorC{display:flex;
@@ -84,7 +104,7 @@
 }
 //登录
 .loginC{width: 100vw;height: 100vh;background: url(../img/login_bgpic.png) no-repeat center center;background-size: cover;position: relative;
-    .loginCenter{width:440px;margin: auto;text-align: center;position:absolute;top:50%;left: 50%;transform:translate(-50%,-60%);
+    .loginCenter{width:440px;max-width: 100%;margin: auto;text-align: center;position:absolute;top:50%;left: 50%;transform:translate(-50%,-50%);
         img{display: block;max-width: 100%;}
         .loginfoC{width: 285px;margin: auto;background-color: #fff;padding:68px 20px 32px;margin-top:80px;
             box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.08);position: relative;
