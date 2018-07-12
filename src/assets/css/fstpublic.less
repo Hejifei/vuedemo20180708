@@ -1,20 +1,25 @@
 // #app{min-width:1200px;}
 .el-main{padding:0;background-color: #fff !important;line-height: 30px !important;}
-
+.indexC{width:100%;height: 100%;}
+.indexBGC{
+    // background:url(../img/main_bgpic.png) no-repeat center center;background-size:cover;
+    @cap: 50px;
+    height: calc(~"100% - @{cap}");}
+.headtopa{color: #606266;text-decoration: none;}
+.headtopa:hover{background-color: #ecf5ff;color: #66b1ff;}
 .listtitle{line-height: 50px;padding:0 40px;background-color: #F2F2F2;color:#232323;font-size:16px;text-align: left;}
 // 列表页搜索部分
-.listSearchC{padding:0 40px;text-align:left;line-height:35px;padding:25px 40px;font-size:14px;
+.listSearchC{padding:0 20px;text-align:left;line-height:35px;padding:25px 40px;font-size:14px;
     p{line-height: 28px;margin-bottom:20px;
         label{font-size:20px;
             span{color:#7AC231;}
         }
     }
-    .el-input{width:172px;display:inline-block;margin-right:20px;}
-    .el-button{min-width: 96px;display: inline-block;
-    }
+    .el-input{width:172px;display:inline-block;margin:12px 0;margin-right:20px;}
+    .el-button{min-width: 96px;display: inline-block;margin:12px 0;}
     a,button{box-shadow:0 0 3px 0 rgba(0, 0, 0, 0.8);text-decoration: none;}
     a:hover,button:hover{color: #CF0000;background-color: #fff;}
-    .el-row{margin-top:20px;
+    .el-row{
         .rowright{text-align: right;position: relative;
             button{background-color:rgb(42, 43, 49);color:#fff;min-width:104px;
                 img{width:14px;height:14px;display:inline-block;position: relative;top:2px;margin-right:10px;}
@@ -37,6 +42,9 @@
     .el-pager li:hover {color: #000;}
     .el-pagination.is-background .el-pager li:not(.disabled):hover {color: #000;}
     .el-pagination.is-background .el-pager li:not(.disabled).active {background-color: #000;color: #fff;}
+    .btn2{width:180px !important;}
+    .btn3{width:250px !important;}
+    .btn4{width:340px !important;}
 }
 // 新增界面
 .newaddInfoC{padding:20px 30px;
@@ -81,6 +89,13 @@
             margin-right:20px;
         }
     }
+    // 新增界面表格
+    .addtableC{
+        .el-table th{text-align: center;}
+        .el-table__body tbody tr:nth-child(odd){background-color:#f2f2f2; }
+        .el-table__body tbody tr:nth-child(even){background-color:#cecece; }
+    }
+    .el-button{text-decoration: none;}
 }
 // 监控管理模块
 .monitorC{display:flex;

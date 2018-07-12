@@ -22,7 +22,7 @@
           prop="date"
           label="最近抓拍时间">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width=180>
           <template slot-scope="scope">
             <router-link to="/PeopleAdd" class="el-button el-button--mini redbtn">登记</router-link>
             <el-button class="delbtn"

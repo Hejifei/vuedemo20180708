@@ -1,13 +1,7 @@
 <template>
-  <div class="hello">
-    首页
-    <router-link class="fl" to="/login">
-    登陆
-    <div class='flexdiv'>
-      <div class='width50'>50px</div>
-      <div class='width1'>1flex</div>
-    </div>
-    </router-link>
+  <div class="indexC">
+    <div class="listtitle">首页</div>
+    <div class="indexBGC" :style="indexBG"></div>
   </div>
 </template>
 
@@ -16,14 +10,17 @@ export default {
   name: 'Layout',
   data () {
     return {
+      indexBG:{
+        backgroundImage: "url(" + require("../../assets/img/main_bgpic.png") + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundPositon: 'center center',
+        backgroundSize: "cover",
+      }
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.flexdiv{display:flex;}
-.width50{width:50px;}
-.width1{flex:1;}
+<style>
 </style>

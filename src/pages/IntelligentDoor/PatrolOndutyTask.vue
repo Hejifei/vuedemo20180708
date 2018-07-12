@@ -52,7 +52,7 @@
         </el-table-column>
         <el-table-column label="操作" width=340>
           <template slot-scope="scope">
-            <router-link to="/PatrolOndutyAdd" class="el-button el-button--mini redbtn">查看</router-link>
+            <router-link to="/SignRecord" class="el-button el-button--mini redbtn">查看</router-link>
             <router-link to="/PatrolOndutyAdd" class="el-button el-button--mini redbtn">修改</router-link>
             <router-link :to="'/NoticeOfLeaving?id='+scope.row.id" class="el-button el-button--mini greybtn">离岗通知</router-link>
             <el-button class="greybtn"

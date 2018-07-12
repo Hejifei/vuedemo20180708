@@ -36,12 +36,12 @@
           label="场景名称">
         </el-table-column>
         <el-table-column
-          prop="desc"
+          prop="remark"
           label="场景描述">
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <router-link to="/SceneAdd" class="el-button el-button--mini redbtn">修改</router-link>
+            <router-link :to="'/SceneAdd?id='+scope.row.id" class="el-button el-button--mini redbtn">修改</router-link>
             <el-button class="delbtn"
               size="mini"
               type="danger"
@@ -52,8 +52,8 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :current-page.sync="querydata.currentPage"
-        :page-size="querydata.pagesize"
+        :current-page.sync="querydata.pageIndex"
+        :page-size="querydata.pageSize"
         :total="querydata.pagetotal"
         @current-change="handleCurrentChange">
       </el-pagination>
@@ -68,25 +68,11 @@ export default {
       delIds:[],
       querydata:{
         name:'',
-        phone:'',
-        selectval:'选项1',
-        currentPage: 1,
-        pagesize:10,
-        pagetotal:100
+        pageIndex: 1,
+        pageSize:10,
+        pagetotal:10
       },
-      options: [{
-          value: '选项1',
-          label: '选项1'
-      }],
-      tableData: [{
-          id: '1',
-          name: 'BH00000X',
-          desc: '场景描述xxxxxx',
-        }, {
-          id: '2',
-          name: 'BH00000X',
-          desc: '场景描述xxxxxx',
-      }],
+      tableData: [],
       
     }
   },
@@ -101,10 +87,13 @@ export default {
   methods: {
     querylist(){
       let self = this;
-      console.log(`当前页: ${self.querydata.currentPage}`);
-      // self._ajax(self,'/api/', self.querydata, function (data) {
-
-      // })
+      // console.log(`当前页: ${self.querydata.currentPage}`);
+      self._ajax(self,'/sense/query', self.querydata, function (data) {
+        self.querydata.pagetotal = data.data.total;
+        self.querydata.pageSize = data.data.pageSize;
+        self.querydata.pageIndex = data.data.pageNum;
+        self.tableData = data.data.list;
+      })
     },
     handleCurrentChange(val) {
       // console.log(`当前页: ${val}`);
@@ -113,7 +102,9 @@ export default {
     handleDelete(id){
       //删除接口
       var self = this;
-      this.Delete(self,'url',id);
+      let newarr = new Array();
+      newarr.push(id)
+      this.Delete(self,'/sense/delete',{ids:newarr});
     },
     handleSelectionChange(val) {
       // 获取列表选中项id
@@ -121,8 +112,7 @@ export default {
     },
     listDelete(){
       // 列表页删除
-      console.log(`删除以下：${this.delIds}`)
-      // this.Delete(self,'url',this.delIds);
+      this.Delete(this,'/sense/delete',{ids:this.delIds});
     }
   },
 }

@@ -42,9 +42,9 @@
           prop="phone"
           label="状态">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width=250>
           <template slot-scope="scope">
-            <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">查看</router-link>
+            <router-link to="/PeopleGroupListDetail" class="el-button el-button--mini redbtn">查看</router-link>
             <router-link to="/PeopleGroupListAdd" class="el-button el-button--mini redbtn">编辑</router-link>
             <el-button class="delbtn"
               size="mini"

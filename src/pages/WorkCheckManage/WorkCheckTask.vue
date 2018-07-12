@@ -52,7 +52,7 @@
           prop="state"
           label="状态">
         </el-table-column>
-        <el-table-column label="操作" width=250>
+        <el-table-column label="操作" width=180>
           <template slot-scope="scope">
             <router-link to="/WorkCheckAdd" class="el-button el-button--mini redbtn">修改</router-link>
             <el-button class="greybtn"

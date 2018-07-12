@@ -84,7 +84,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitForm('ruleForm')">保存</el-button>
-        <el-button @click="backtolist()">取消</el-button>
+        <router-link class="el-button" to="/WorkCheckTask">取消</router-link>
       </el-form-item>
     </el-form>
     
@@ -182,9 +182,6 @@ export default {
     },
     handleChange(value, direction, movedKeys) {
       console.log(value, direction, movedKeys);
-    },
-    backtolist() {
-      this.$router.push({path:'/WorkCheckTask'});
     },
     querylist(){
       let self = this;

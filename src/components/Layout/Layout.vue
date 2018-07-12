@@ -17,7 +17,9 @@
                 <img class="headimg" src='../../assets/img/head.jpg'/>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>修改密码</el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link class="headtopa" to="/PasswordReset">修改密码</router-link>
+                </el-dropdown-item>
                 <el-dropdown-item>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -32,7 +34,12 @@
               text-color="#fff"
               background='transparent'
               active-text-color="#fff"
+              :unique-opened='true'
               :router="true">
+              <el-menu-item class="textleft" index="/">
+                <img src="../../assets/img/icons/side_jkgl.png"/>
+                <span slot="title">首页</span>
+              </el-menu-item>
               <el-submenu class="textleft" index="1">
                 <template slot="title">
                   <img src="../../assets/img/icons/side_rygl.png"/>
@@ -91,10 +98,14 @@
                 <el-menu-item index="/VistorAuthorize">访客授权</el-menu-item>
                 <el-menu-item index="/VistorRecord">访客记录</el-menu-item>
               </el-submenu>
-              <el-menu-item class="textleft" index="8">
-                <img src="../../assets/img/icons/side_xtgl.png"/>
-                <span slot="title">系统管理</span>
-              </el-menu-item>
+              <el-submenu class="textleft" index="8">
+                <template slot="title">
+                  <img src="../../assets/img/icons/side_xtgl.png"/>
+                  <span>系统管理</span>
+                </template>
+                <el-menu-item index="/RoleManage">角色管理</el-menu-item>
+                <el-menu-item index="/EmployeeManage">员工管理</el-menu-item>
+              </el-submenu>
             </el-menu>
           </el-aside>
         </el-collapse-transition>

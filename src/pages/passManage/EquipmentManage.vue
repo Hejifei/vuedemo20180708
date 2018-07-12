@@ -56,7 +56,7 @@
           prop="scene"
           label="场景">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width=180>
           <template slot-scope="scope">
             <router-link to="/EquipmentAdd" class="el-button el-button--mini redbtn">查看</router-link>
             <el-button class="delbtn"

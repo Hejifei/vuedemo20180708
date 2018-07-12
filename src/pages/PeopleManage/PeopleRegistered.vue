@@ -12,12 +12,12 @@
         v-model="querydata.phone"
         clearable>
       </el-input>
-      <el-select v-model="querydata.selectval" placeholder="请选择">
+      <el-select v-model="querydata.personType" placeholder="请选择">
         <el-option
-          v-for="item in options"
+          v-for="item in typelist"
           :key="item.value"
-          :label="item.label"
-          :value="item.value">
+          :label="item.desc"
+          :value="item.code">
         </el-option>
       </el-select>
       <el-button round @click="querylist">查询</el-button>
@@ -53,7 +53,7 @@
           label="姓名">
         </el-table-column>
         <el-table-column
-          prop="sex"
+          prop="gender"
           label="性别">
         </el-table-column>
         <el-table-column
@@ -65,10 +65,10 @@
           label="类型">
         </el-table-column>
         <el-table-column
-          prop="idcard"
+          prop="idCard"
           label="身份证号码">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作"  width=180>
           <template slot-scope="scope">
             <router-link to="/PeopleAdd" class="el-button el-button--mini redbtn">查看</router-link>
             <el-button class="delbtn"
@@ -81,8 +81,8 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :current-page.sync="querydata.currentPage"
-        :page-size="querydata.pagesize"
+        :current-page.sync="querydata.pageIndex"
+        :page-size="querydata.pageSize"
         :total="querydata.pagetotal"
         @current-change="handleCurrentChange">
       </el-pagination>
@@ -98,30 +98,13 @@ export default {
       querydata:{
         name:'',
         phone:'',
-        selectval:'选项1',
-        currentPage: 1,
-        pagesize:10,
-        pagetotal:100
+        personType:'',
+        pageIndex: 1,
+        pageSize:10,
+        pagetotal:10
       },
-      options: [{
-          value: '选项1',
-          label: '选项1'
-      }],
-      tableData: [{
-          id: '1',
-          name: '王小虎',
-          sex: '男',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
-        }, {
-          id: '2',
-          name: '王小二',
-          sex: '女',
-          phone: '18020285668',
-          type:'宿管',
-          idcard:'320981199306174736',
-      }],
+      typelist: [],
+      tableData: [],
       
     }
   },
@@ -130,16 +113,25 @@ export default {
   },
   mounted () {  
     let self = this;
+    // 人员类型
+    self._ajax(self,'/person/type/all', {}, function (data) {
+      self.typelist = data.data;
+      // value: '选项1',
+      //     label: '选项1'
+    })
     // 页面加载获取第一列数据
     this.querylist();
   },
   methods: {
     querylist(){
       let self = this;
-      console.log(`当前页: ${self.querydata.currentPage}`);
-      // self._ajax(self,'/api/', self.querydata, function (data) {
-
-      // })
+      // console.log(`当前页: ${self.querydata.pageIndex}`);
+      self._ajax(self,'/person/query', self.querydata, function (data) {
+        self.querydata.pagetotal = data.data.total;
+        self.querydata.pageSize = data.data.pageSize;
+        self.querydata.pageIndex = data.data.pageNum;
+        self.tableData = data.data.list;
+      })
     },
     handleCurrentChange(val) {
       // console.log(`当前页: ${val}`);
@@ -148,7 +140,9 @@ export default {
     handleDelete(id){
       //删除接口
       var self = this;
-      this.Delete(self,'url',id);
+      let newarr = new Array();
+      newarr.push(id)
+      this.Delete(self,'/person/delete',{ids:newarr});
     },
     handleSelectionChange(val) {
       // 获取列表选中项id
@@ -156,8 +150,7 @@ export default {
     },
     listDelete(){
       // 列表页删除
-      console.log(`删除以下：${this.delIds}`)
-      // this.Delete(self,'url',this.delIds);
+      this.Delete(this,'/person/delete',{ids:this.delIds});
     }
   },
 }

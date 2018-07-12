@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 function install(Vue, options) {
-    let APIURL = 'http://172.16.0.60:8080'
+    let APIURL = 'http://172.16.0.65:8080'
 
     //ajax全局配置_url接口名称 a参数 b成功方法(code 1)  c失败方法(code other)
     const _ajax = function(that,_url, a, b, c) {
@@ -39,25 +39,25 @@ function install(Vue, options) {
             // console.log(res)
             let d = res.data;
             d = (typeof(d) == 'string') ? JSON.parse(d) : d;
-            d.code == '1' ? b(d) : c(d);
+            d.code == '200' ? b(d) : c(d);
           }).catch(function(err){
             console.log('报错：' +err);
           })
     }
 
     // 删除的公共方法
-    const Delete = (that,url,id)=>{
+    const Delete = (that,url,id,successFun)=>{
         that.$confirm('确认删除?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
         }).then(() => {
-            console.log('1111111111')
-            self._ajax(self,APIURL+url, id, function (data) {
+            _ajax(that,url, id, function (data) {
                 that.$message({
                     type: 'success',
                     message: '删除成功!'
                 });
+                that.querylist();
             })
         }).catch(() => {
             that.$message({

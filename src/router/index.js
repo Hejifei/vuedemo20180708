@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import LoginLayout from '@/pages/Layout/LoginLayout'
-import Layout from '@/pages/Layout/Layout'
+// 公共界面
+import Layout from '@/components/Layout/Layout'
+// 登陆页
 import Login from '@/pages/Login/Index'
+// 首页
 import Index from '@/pages/Index/Index'
-import List from '@/pages/Index/List'
-import Listson from '@/pages/Index/Listson'
+// 密码修改页
+import PasswordReset from '@/pages/Index/PasswordReset'
+
 // 人员管理
 import PeopleRegistered from '@/pages/PeopleManage/PeopleRegistered';//已登记人员管理
 import PeopleAdd from '@/pages/PeopleManage/PeopleAdd';//新增人员
 import PeopleUnRegist from '@/pages/PeopleManage/PeopleUnRegist';//未登记人员管理
 import PeopleGroupList from '@/pages/PeopleManage/PeopleGroupList';//人员分组管理
 import PeopleGroupListAdd from '@/pages/PeopleManage/PeopleGroupListAdd';//人员分组增加
+import PeopleGroupListDetail from '@/pages/PeopleManage/PeopleGroupListDetail';//人员分组增加
 import PeopleDataAsync from '@/pages/PeopleManage/PeopleDataAsync';//人员数据同步
 import PeopleDataAsyncNext from '@/pages/PeopleManage/PeopleDataAsyncNext';//人员数据同步下一步
 import PeopleDataAsyncDetail from '@/pages/PeopleManage/PeopleDataAsyncDetail';//人员数据同步查看
@@ -35,6 +38,7 @@ import MonitorManage from '@/pages/MonitorManage/MonitorManage';//监控管理
 import PatrolOndutyTask from '@/pages/IntelligentDoor/PatrolOndutyTask';//在岗巡查任务
 import PatrolOndutyAdd from '@/pages/IntelligentDoor/PatrolOndutyAdd';//新增在岗巡查
 import NoticeOfLeaving from '@/pages/IntelligentDoor/NoticeOfLeaving';//离岗通知
+import SignRecord from '@/pages/IntelligentDoor/SignRecord';//签到记录
 import PatrolOndutyRecord from '@/pages/IntelligentDoor/PatrolOndutyRecord';//在岗巡查记录
 import ExposureTimesTask from '@/pages/IntelligentDoor/ExposureTimesTask';//曝光频次任务
 import ExposureTimesAdd from '@/pages/IntelligentDoor/ExposureTimesAdd';//新增曝光频次
@@ -53,12 +57,19 @@ import VistorAuthorize from '@/pages/VistorManage/VistorAuthorize';//访客授�
 import Authorize from '@/pages/VistorManage/Authorize';//访客授权
 import VistorRecord from '@/pages/VistorManage/VistorRecord';//访客记录
 
+//系统管理
+import RoleManage from '@/pages/SystemManage/RoleManage';//角色管理
+import RoleAdd from '@/pages/SystemManage/RoleAdd';//新增角色
+import EmployeeManage from '@/pages/SystemManage/EmployeeManage';//员工管理
+import EmployeeAdd from '@/pages/SystemManage/EmployeeAdd';//员工角色
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {path: '/',component: Layout,
       children:[
+        //首页
         {path: '/',component: Index,},
         //人员管理
         {path: '/PeopleRegistered',component: PeopleRegistered,},
@@ -66,6 +77,7 @@ export default new Router({
         {path: '/PeopleUnRegist',component: PeopleUnRegist,},
         {path: '/PeopleGroupList',component: PeopleGroupList,},
         {path: '/PeopleGroupListAdd',component: PeopleGroupListAdd,},
+        {path: '/PeopleGroupListDetail',component: PeopleGroupListDetail,},
         {path: '/PeopleDataAsync',component: PeopleDataAsync,},
         {path: '/PeopleDataAsyncNext',component: PeopleDataAsyncNext,},
         {path: '/PeopleDataAsyncDetail',component: PeopleDataAsyncDetail,},
@@ -84,6 +96,7 @@ export default new Router({
         {path: '/PatrolOndutyTask',component: PatrolOndutyTask,},
         {path: '/PatrolOndutyAdd',component: PatrolOndutyAdd,},
         {path: '/NoticeOfLeaving',component: NoticeOfLeaving,},
+        {path: '/SignRecord',component: SignRecord,},
         {path: '/PatrolOndutyRecord',component: PatrolOndutyRecord,},
         {path: '/ExposureTimesTask',component: ExposureTimesTask,},
         {path: '/ExposureTimesAdd',component: ExposureTimesAdd,},
@@ -99,13 +112,14 @@ export default new Router({
         {path: '/VistorAuthorize',component: VistorAuthorize,},
         {path: '/Authorize',component: Authorize,},
         {path: '/VistorRecord',component: VistorRecord,},
+        //系统管理
+        {path: '/RoleManage',component: RoleManage,},
+        {path: '/RoleAdd',component: RoleAdd,},
+        {path: '/EmployeeManage',component: EmployeeManage,},
+        {path: '/EmployeeAdd',component: EmployeeAdd,},
+        {path: '/PasswordReset',component: PasswordReset,},
       ]
     },
-    {path: '/login',component: Login,
-      // children:[
-      //   // {path: '',redirect: '/login/index'},
-      //   {path: '/login',component: Login,},
-      // ]
-    }
+    {path: '/login',component: Login,}
   ]
 })

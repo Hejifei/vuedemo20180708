@@ -36,6 +36,7 @@
         </el-table-column>
         <el-table-column
           prop="desc"
+          :title='desc'
           :show-overflow-tooltip='true'
           label="来访事由">
         </el-table-column>
@@ -43,7 +44,7 @@
           prop="namevisted"
           label="被访人">
         </el-table-column>
-        <el-table-column label="操作" width=250>
+        <el-table-column label="操作" width=180>
           <template slot-scope="scope">
             <router-link to="/PeopleAdd" class="el-button el-button--mini redbtn">查看</router-link>
             <router-link to="/Authorize" class="el-button el-button--mini greybtn">授权</router-link>

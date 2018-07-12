@@ -1,47 +1,47 @@
 <template>
   <div class="hello">
-    <div class="listtitle">离岗通知</div>
+    <div class="listtitle">新增角色</div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position='left' label-width="100px" class="demo-ruleForm newaddInfoC">
-      <el-form-item label="通知形式" prop="noticeForm">
-        <template>
-          <el-radio v-model="ruleForm.noticeForm" label="1">微信公众号</el-radio>
-        </template>
+      <el-form-item label="角色名称" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
-      <el-form-item label="通知类型" prop="noticetype">
-        <template>
-          <el-radio v-model="ruleForm.noticetype" label="1">在岗巡查</el-radio>
-          <el-radio v-model="ruleForm.noticetype" label="2">签到</el-radio>
-        </template>
-      </el-form-item>
-      <el-form-item label="通知内容" prop="desc">
+      <el-form-item label="角色描述" prop="desc">
         <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+      </el-form-item>
+      <el-form-item label="状态" prop="state">
+        <el-select v-model="ruleForm.state" placeholder="请选择状态">
+          <el-option label="有效" value="useful"></el-option>
+          <el-option label="无效" value="unuseful"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitForm('ruleForm')">保存</el-button>
-        <router-link class="el-button" to="/PatrolOndutyTask">取消</router-link>
+        <router-link class="el-button" to="/RoleManage">取消</router-link>
       </el-form-item>
     </el-form>
+    
   </div>
 </template>
 
 <script>
 export default {
   data () {
+    
     return {
       ruleForm: {
-          noticeForm:'',
-          noticetype: '',
-          desc: ''
+          name: '',
+          state: '',
+          desc: '',
       },
       rules: {
-          noticeForm: [
-            { required: true, message: '请选择通知形式', trigger: 'change' }
-          ],
-          noticetype:[
-            { required: true, message: '请选择通知类型', trigger: 'change' }
+          name: [
+            { required: true, message: '请输入角色名称', trigger: 'blur' },
           ],
           desc: [
-            { required: true, message: '请输入通知内容', trigger: 'blur' },
+            { required: true, message: '请输入角色描述', trigger: 'blur' }
+          ],
+          state: [
+            { required: true, message: '请选择状态', trigger: 'change' }
           ],
         }
       }
@@ -57,7 +57,6 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      console.log(this.ruleForm.timerange)
       let self = this;
       this.$refs[formName].validate((valid) => {
           if (valid) {

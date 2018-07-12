@@ -26,8 +26,8 @@
       <el-form-item label="报警密码" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
-      <el-form-item label="类型" prop="sex">
-        <el-select v-model="ruleForm.sex" placeholder="请选择性别">
+      <el-form-item label="类型" prop="type">
+        <el-select v-model="ruleForm.type" placeholder="请选择性别">
           <el-option label="男" value="boy"></el-option>
           <el-option label="女" value="girl"></el-option>
         </el-select>
@@ -35,8 +35,8 @@
       <el-form-item label="标签" prop="phone">
         <el-input v-model="ruleForm.phone"></el-input>
       </el-form-item>
-      <el-form-item label="场景" prop="sex">
-        <el-select v-model="ruleForm.sex" placeholder="请选择性别">
+      <el-form-item label="场景" prop="scene">
+        <el-select v-model="ruleForm.scene" placeholder="请选择性别">
           <el-option label="男" value="boy"></el-option>
           <el-option label="女" value="girl"></el-option>
         </el-select>
@@ -49,7 +49,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitForm('ruleForm')">保存</el-button>
-        <el-button @click="backtolist()">取消</el-button>
+        <router-link class="el-button" to="/EquipmentManage">取消</router-link>
       </el-form-item>
     </el-form>
     
@@ -146,9 +146,6 @@ export default {
     },
     handleChange(value, direction, movedKeys) {
       console.log(value, direction, movedKeys);
-    },
-    backtolist() {
-      this.$router.push({path:'/EquipmentManage'});
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
