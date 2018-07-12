@@ -95,15 +95,14 @@ export default {
       //修改
       self._ajax(self,'/sense/view', {id:this.ruleForm.id}, function (data) {
         self.ruleForm = data.data;
-        let newdeviceIds=new Array();
+        let newdeviceIds=new Object();
         if(data.data.devices.length >0){
           for(let i = 0;i<data.data.devices.length;i++){
             let arr = new Object();
             arr.key = data.data.devices[i].id;
             arr.label = data.data.devices[i].name;
             self.data.push(arr);
-            // newdeviceIds
-            newdeviceIds.push(data.data.devices[i].id)
+            newdeviceIds[i]=data.data.devices[i].id;
           }
         }
         console.log(newdeviceIds)
